@@ -1,11 +1,3 @@
-//
-//  BoundingBoxView.swift
-//  DriveMate
-//
-//  Created by MMH on 17/12/24.
-//
-
-
 import SwiftUI
 
 struct BoundingBoxView: View {
@@ -14,22 +6,26 @@ struct BoundingBoxView: View {
 
     var body: some View {
         GeometryReader { geometry in
-            let box = CGRect(
+            // Scale and flip bounding box coordinates
+            let scaledBox = CGRect(
                 x: boundingBox.minX * geometry.size.width,
-                y: (1 - boundingBox.maxY) * geometry.size.height,
+                y: (1 - boundingBox.maxY) * geometry.size.height, // Flip Y-axis
                 width: boundingBox.width * geometry.size.width,
                 height: boundingBox.height * geometry.size.height
             )
-            ZStack {
+
+            ZStack(alignment: .topLeading) {
+                // Draw the bounding box
                 Rectangle()
-                    .path(in: box)
+                    .path(in: scaledBox)
                     .stroke(Color.red, lineWidth: 2)
-                
+
+                // Draw the label above the bounding box
                 Text(label)
                     .font(.caption)
                     .foregroundColor(.white)
                     .background(Color.red.opacity(0.7))
-                    .position(x: box.midX, y: box.minY - 10)
+                    .position(x: scaledBox.minX + scaledBox.width / 2, y: scaledBox.minY - 10)
             }
         }
     }

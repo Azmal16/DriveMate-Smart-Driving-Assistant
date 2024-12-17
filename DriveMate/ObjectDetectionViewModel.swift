@@ -20,10 +20,11 @@ class ObjectDetectionViewModel: ObservableObject, FrameProcessProtocol {
 
     private func configureModel() {
         guard let model = try? VNCoreMLModel(for: yolo11n(configuration: .init()).model) else { return }
-
+        model.featureProvider = ThresholdProvider(iouThreshold: 0.3, confidenceThreshold: 0.45)
         detectionRequest = VNCoreMLRequest(model: model) { [weak self] request, _ in
             guard let results = request.results as? [VNRecognizedObjectObservation] else { return }
             self?.processDetections(results)
+            self?.detectionRequest?.imageCropAndScaleOption = .scaleFill
         }
     }
 

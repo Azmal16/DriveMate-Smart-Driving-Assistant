@@ -11,7 +11,7 @@ import CoreML
 import Vision
 
 class ObjectDetectionViewModel: ObservableObject, FrameProcessProtocol {
-    @Published var detectedObjects: [(label: String, confidence: Float)] = []
+    @Published var detectedObjects: [DetectedObject] = []
     private var detectionRequest: VNCoreMLRequest?
 
     init() {
@@ -35,9 +35,9 @@ class ObjectDetectionViewModel: ObservableObject, FrameProcessProtocol {
     }
 
     private func processDetections(_ observations: [VNRecognizedObjectObservation]) {
-        let detections = observations.compactMap { observation -> (String, Float)? in
+        let detections = observations.compactMap { observation -> DetectedObject?  in
             guard let topLabel = observation.labels.first else { return nil }
-            return (topLabel.identifier, topLabel.confidence)
+            return DetectedObject(label: topLabel.identifier, confidence: topLabel.confidence)
         }
 
         DispatchQueue.main.async { [weak self] in

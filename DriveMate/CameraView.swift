@@ -13,7 +13,7 @@ struct CameraView: View {
             
             VStack {
                           Spacer()
-                ForEach(detectionViewModel.detectedObjects, id: \.0) { detection in
+                ForEach(detectionViewModel.detectedObjects) { detection in
                               Text("\(detection.label): \(String(format: "%.2f", detection.confidence))")
                                   .padding(8)
                                   .background(Color.black.opacity(0.7))

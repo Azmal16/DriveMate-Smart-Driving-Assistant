@@ -11,17 +11,26 @@ struct CameraView: View {
             CameraPreview(previewLayer: cameraManager.previewLayer)
                 .edgesIgnoringSafeArea(.all)
             
-            VStack {
-                          Spacer()
-                ForEach(detectionViewModel.detectedObjects) { detection in
-                              Text("\(detection.label): \(String(format: "%.2f", detection.confidence))")
-                                  .padding(8)
-                                  .background(Color.black.opacity(0.7))
-                                  .foregroundColor(.white)
-                                  .cornerRadius(8)
-                          }
-                          .padding(.bottom, 20)
-                      }
+//            VStack {
+//                Text("\(detectionViewModel.detectedObjects.count)")
+//                    .padding(8)
+//                    .background(Color.black.opacity(0.7))
+//                    .foregroundColor(.white)
+//                    .cornerRadius(8)
+//                Spacer()
+//                ForEach(detectionViewModel.detectedObjects) { detection in
+//                              Text("\(detection.label): \(String(format: "%.2f", detection.confidence))")
+//                                  .padding(8)
+//                                  .background(Color.black.opacity(0.7))
+//                                  .foregroundColor(.white)
+//                                  .cornerRadius(8)
+//                          }
+//                          .padding(.bottom, 20)
+//                      }
+            
+            ForEach(detectionViewModel.detectedObjects) { detection in
+                            BoundingBoxView(boundingBox: detection.boundingBox, label: detection.label)
+                        }
             
         }
         .onAppear {

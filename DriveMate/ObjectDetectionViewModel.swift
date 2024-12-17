@@ -35,10 +35,13 @@ class ObjectDetectionViewModel: ObservableObject, FrameProcessProtocol {
     }
 
     private func processDetections(_ observations: [VNRecognizedObjectObservation]) {
-        let detections = observations.compactMap { observation -> DetectedObject?  in
-            guard let topLabel = observation.labels.first else { return nil }
-            return DetectedObject(label: topLabel.identifier, confidence: topLabel.confidence)
-        }
+        let detections = observations.map { observation -> DetectedObject in
+                let boundingBox = observation.boundingBox
+                let label = observation.labels.first?.identifier ?? "Unknown"
+                let confidence = observation.labels.first?.confidence ?? 0.0
+                
+                return DetectedObject(label: label, confidence: confidence, boundingBox: boundingBox)
+            }
 
         DispatchQueue.main.async { [weak self] in
             self?.detectedObjects = detections

@@ -12,4 +12,5 @@ struct DetectedObject: Identifiable {
     let id: UUID = UUID()
     let label: String
     let confidence: Float
+    let boundingBox: CGRect
 }

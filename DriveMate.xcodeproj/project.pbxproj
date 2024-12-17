@@ -29,9 +29,22 @@
 		915C9EFB2D09918A00EA3D81 /* DriveMateUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DriveMateUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		915C9F172D09A5E500EA3D81 /* Exceptions for "DriveMate" folder in "DriveMate" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 915C9EE02D09918800EA3D81 /* DriveMate */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		915C9EE32D09918800EA3D81 /* DriveMate */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				915C9F172D09A5E500EA3D81 /* Exceptions for "DriveMate" folder in "DriveMate" target */,
+			);
 			path = DriveMate;
 			sourceTree = "<group>";
 		};
@@ -399,6 +412,8 @@
 				DEVELOPMENT_TEAM = 345FY7Y564;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DriveMate/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Please provide camera usage permision";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -428,6 +443,8 @@
 				DEVELOPMENT_TEAM = 345FY7Y564;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DriveMate/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Please provide camera usage permision";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

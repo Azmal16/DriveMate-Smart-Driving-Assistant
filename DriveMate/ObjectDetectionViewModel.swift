@@ -13,6 +13,7 @@ import Vision
 class ObjectDetectionViewModel: ObservableObject, FrameProcessProtocol {
     @Published var detectedObjects: [DetectedObject] = []
     private var detectionRequest: VNCoreMLRequest?
+    private var maxObjects = 10
 
     init() {
         configureModel()
@@ -36,16 +37,17 @@ class ObjectDetectionViewModel: ObservableObject, FrameProcessProtocol {
     }
 
     private func processDetections(_ observations: [VNRecognizedObjectObservation]) {
-        let detections = observations.map { observation -> DetectedObject in
+        let detections = observations.map { observation -> DetectedObject? in
                 let boundingBox = observation.boundingBox
                 let label = observation.labels.first?.identifier ?? "Unknown"
                 let confidence = observation.labels.first?.confidence ?? 0.0
-                
+            if classNames.contains(label) {
                 return DetectedObject(label: label, confidence: confidence, boundingBox: boundingBox)
-            }
+            } else { return nil }
+        }
 
         DispatchQueue.main.async { [weak self] in
-            self?.detectedObjects = detections
+            self?.detectedObjects = detections.compactMap { $0 }
         }
     }
 }
